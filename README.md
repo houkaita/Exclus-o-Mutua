@@ -17,11 +17,6 @@ O objetivo deste trabalho é garantir que vários processos possam acessar uma r
 - `process.py`: Script que implementa um processo que se conecta ao coordenador.
 - `resultado.txt`: Arquivo onde os processos registram seu acesso à região crítica.
 
-## Requisitos
-
-- Python 3.x
-- Bibliotecas padrão do Python: `socket`, `threading`, `queue`, `time`
-
 ## Como Rodar
 
 ### Passo 1: Iniciar o Coordenador
