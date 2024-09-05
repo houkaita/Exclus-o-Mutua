@@ -15,13 +15,15 @@ def run_process(host, port, process_id, r):
         data = client_socket.recv(1024).decode()
         if data == "GRANT":
             print(f"[PROCESS {process_id}] Received: GRANT")
-            enter_critical_section(process_id)
             
+            # Entra na região crítica, escreve e aguarda
+            enter_critical_section(process_id)
+            time.sleep(10)  # Aguarda 10 segundos DENTRO da região crítica
+            
+            # Após aguardar, envia RELEASE
             release_msg = f"RELEASE|{process_id}|{repetition_str}"
             print(f"[PROCESS {process_id}] Sending: {release_msg}")
             client_socket.sendall(release_msg.encode())
-        
-        time.sleep(2)
 
     client_socket.close()
 
