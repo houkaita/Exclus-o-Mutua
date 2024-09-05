@@ -6,8 +6,9 @@ def run_process(host, port, process_id, r):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
 
-    for _ in range(r):
-        request_msg = f"REQUEST|{process_id}|000000"
+    for i in range(1, r + 1):
+        repetition_str = f"{i:06}"
+        request_msg = f"REQUEST|{process_id}|{repetition_str}"
         print(f"[PROCESS {process_id}] Sending: {request_msg}")
         client_socket.sendall(request_msg.encode())
         
@@ -16,7 +17,7 @@ def run_process(host, port, process_id, r):
             print(f"[PROCESS {process_id}] Received: GRANT")
             enter_critical_section(process_id)
             
-            release_msg = f"RELEASE|{process_id}|000000"
+            release_msg = f"RELEASE|{process_id}|{repetition_str}"
             print(f"[PROCESS {process_id}] Sending: {release_msg}")
             client_socket.sendall(release_msg.encode())
         

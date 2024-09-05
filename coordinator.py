@@ -1,7 +1,6 @@
 import socket
 import threading
 from queue import Queue
-import time
 
 class Coordinator:
     def __init__(self, host, port):
